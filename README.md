@@ -40,9 +40,9 @@ Campos canónicos: `phoneNumber` y `address`. Se aceptan `phoneNumer` y `adress`
 
 Las cuentas anteriores que no tengan apellidos, teléfono o nacimiento deberán completar esos datos al guardar su perfil. No se inventan datos personales para migrarlas.
 
-## Verificación
+## Requisitos y presentación
 
-Requiere Node.js 22 o superior. `npm test` ejecuta pruebas de validación, registro, autorización, navegación y perfil usando una base MongoDB temporal aislada. En Windows busca `C:/Program Files/MongoDB/Server/8.3/bin/mongod.exe`; para otra instalación configura `MONGOD_BINARY` con la ruta del ejecutable. En otros sistemas usa `mongod` del PATH. Nunca conecta las pruebas a `MONGODB_URI` ni elimina datos de tu base.
+Requiere Node.js 22 o superior y una conexión a MongoDB configurada en `MONGODB_URI`.
 
 Materialize 2 se sirve localmente desde `@materializecss/materialize`; el detalle utiliza un diálogo HTML nativo con sus estilos Materialize. Las fuentes de Google son opcionales y tienen fuentes de respaldo.
 
