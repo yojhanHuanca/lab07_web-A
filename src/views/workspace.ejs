@@ -1,0 +1,39 @@
+<%- include('partials/head') %>
+<body data-page="<%= page %>" class="workspace-body">
+<div class="app-layout">
+  <aside class="sidebar">
+    <a class="brand" href="/dashboard"><span class="brand-mark">n</span> nexo<span class="brand-dot">.</span></a>
+    <div class="nav-caption">MI ESPACIO</div>
+    <nav class="side-nav" aria-label="Navegación principal">
+      <a class="<%= page === 'dashboard' ? 'active' : '' %>" href="/dashboard"><%- include('partials/icon', { name: 'grid' }) %> Resumen</a>
+      <a class="<%= page === 'profile' ? 'active' : '' %>" href="/profile"><%- include('partials/icon', { name: 'profile' }) %> Mi cuenta</a>
+      <% if (admin) { %><div class="nav-caption">ADMINISTRACIÓN</div><a class="<%= page === 'admin' ? 'active' : '' %>" href="/admin"><%- include('partials/icon', { name: 'people' }) %> Usuarios</a><% } %>
+    </nav>
+    <div class="sidebar-bottom"><div class="sidebar-tip"><span>Todo en su lugar.</span><p>Mantén tus datos al día para seguir conectado.</p></div><button class="logout" type="button"><%- include('partials/icon', { name: 'logout' }) %> <span>Cerrar sesión</span></button></div>
+  </aside>
+  <div class="main-area">
+    <header class="topbar"><div><span class="muted">Mi espacio</span><span class="breadcrumb-separator">/</span><strong><%= title %></strong></div><a href="/profile" class="top-user"><span data-user-name>Mi cuenta</span><span class="avatar small" data-avatar>N</span></a></header>
+    <main class="content">
+      <div class="page-heading"><div><span class="eyebrow"><%= page === 'admin' ? 'DIRECTORIO DE LA COMUNIDAD' : 'A TU MANERA' %></span><h1><%= page === 'dashboard' ? 'Tu espacio, en un vistazo.' : page === 'profile' ? 'Mi cuenta' : 'Personas que conectan.' %></h1><p class="subtitle"><%= page === 'dashboard' ? 'Bienvenido. Aquí están tus datos y lo que necesitas para empezar.' : page === 'profile' ? 'Tu información personal, siempre actualizada.' : 'Conoce y consulta a todos los usuarios de Nexo.' %></p></div><span class="status-pill"><span></span> <%= admin ? 'Administrador' : 'Usuario' %></span></div>
+      <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+      <div id="loading" class="loading" role="status"><div class="progress"><div class="indeterminate"></div></div>Preparando tu espacio…</div>
+      <button id="retry-load" class="btn primary-btn retry-button" type="button" hidden>Volver a intentar ↻</button>
+      <div id="page-content" hidden>
+      <% if (page === 'dashboard') { %>
+        <section class="welcome-card"><div><span class="eyebrow light">ESTÁS EN CASA</span><h2>Hola, <span data-user-name></span><span class="welcome-dot">.</span></h2><p>Este es tu punto de partida.<br>Haz que tu perfil cuente tu historia.</p><a href="/profile" class="btn waves-effect cream-btn">Ver mi cuenta <span>↗</span></a></div><div class="welcome-art" aria-hidden="true"><span>n.</span></div></section>
+        <div class="stats-grid"><article class="stat-card"><span class="stat-icon"><%- include('partials/icon', { name: 'profile' }) %></span><span class="stat-label">Tu perfil</span><strong id="completion">—</strong><span class="muted">Información completada</span></article><article class="stat-card"><span class="stat-icon"><%- include('partials/icon', { name: 'shield' }) %></span><span class="stat-label">Tipo de cuenta</span><strong id="account-role">—</strong><span class="muted">Tu acceso en Nexo</span></article><article class="stat-card"><span class="stat-icon"><%- include('partials/icon', { name: 'calendar' }) %></span><span class="stat-label">Miembro desde</span><strong id="joined">—</strong><span class="muted">El inicio de tu historia</span></article></div>
+        <section class="panel"><div class="panel-heading"><h2>Tu información</h2><a href="/profile">Editar perfil ↗</a></div><dl id="summary" class="details-grid"></dl></section>
+      <% } else if (page === 'profile') { %>
+        <div class="profile-layout"><aside class="panel profile-card"><div class="avatar large" data-avatar>N</div><h2 id="full-name"></h2><p id="profile-email" class="muted"></p><span class="role-badge" id="profile-role"></span><hr><div class="profile-meta"><span>Edad</span><strong id="profile-age">—</strong></div><div class="profile-meta"><span>Registro</span><strong id="profile-joined">—</strong></div><p class="small-note">Tu contraseña nunca se muestra. Puedes cambiarla desde el formulario.</p></aside><section class="panel edit-panel"><div class="panel-heading"><div><h2>Información personal</h2><p class="muted">Los campos sin «opcional» son obligatorios.</p></div><span class="section-number">01</span></div><form id="profile-form"><%- include('partials/fields', { editing: true }) %><div class="form-actions"><span id="save-state" class="muted" role="status">Haz que tus datos estén al día.</span><button class="btn waves-effect primary-btn" type="submit">Guardar cambios <span>→</span></button></div></form></section></div>
+      <% } else { %>
+        <div class="stats-grid"><article class="stat-card"><span class="stat-icon"><%- include('partials/icon', { name: 'people' }) %></span><span class="stat-label">Comunidad</span><strong id="total-users">0</strong><span class="muted">Usuarios registrados</span></article><article class="stat-card"><span class="stat-icon"><%- include('partials/icon', { name: 'shield' }) %></span><span class="stat-label">Administración</span><strong id="total-admins">0</strong><span class="muted">Cuentas con rol admin</span></article><article class="stat-card"><span class="stat-icon"><%- include('partials/icon', { name: 'profile' }) %></span><span class="stat-label">Este mes</span><strong id="total-new">0</strong><span class="muted">Nuevos registros</span></article></div>
+        <section class="panel directory"><div class="panel-heading"><div><h2>Todos los usuarios</h2><p class="muted" id="result-count"></p></div><div class="search-field"><label class="sr-only" for="search">Buscar usuarios</label><input id="search" type="search" placeholder="Buscar nombre o email…"></div></div><div class="table-scroll"><table class="highlight"><thead><tr><th>Usuario</th><th>Teléfono</th><th>Rol</th><th>Fecha de registro</th><th><span class="sr-only">Acciones</span></th></tr></thead><tbody id="users-table"></tbody></table></div><p id="empty-state" class="empty-state" hidden>No encontramos usuarios con esa búsqueda.</p></section>
+        <dialog id="user-modal" class="modal" aria-labelledby="modal-title"><div class="modal-content"><span class="eyebrow">DIRECTORIO NEXO</span><h2 id="modal-title">Información del usuario</h2><dl id="user-detail" class="details-grid"></dl></div><div class="modal-footer"><button class="modal-close btn-flat" type="button">Cerrar</button></div></dialog>
+      <% } %>
+      </div>
+      <footer class="workspace-footer"><span>Nexo · Un espacio para ti</span><span>Conecta con lo que importa.</span></footer>
+    </main>
+  </div>
+</div>
+<noscript>Activa JavaScript para iniciar sesión y administrar tu cuenta.</noscript>
+</body></html>

@@ -1,0 +1,19 @@
+<span class="icon-3d icon-<%= name %>" aria-hidden="true">
+  <svg viewBox="0 0 48 48" fill="none" focusable="false">
+    <% if (name === 'profile') { %>
+      <circle class="icon-depth" cx="24" cy="17" r="8"/><path class="icon-depth" d="M9 41v-4c0-9 7-13 15-13s15 4 15 13v4z"/>
+      <circle class="icon-face" cx="24" cy="14" r="8"/><path class="icon-face" d="M9 38v-4c0-9 7-13 15-13s15 4 15 13v4z"/><path class="icon-highlight" d="M18 11c1-2 3-3 6-3M15 32c1-3 3-5 6-6"/>
+    <% } else if (name === 'shield') { %>
+      <path class="icon-depth" d="M24 6 40 12v13c0 10-9 17-16 20C17 42 8 35 8 25V12z"/><path class="icon-face" d="M24 3 40 9v13c0 10-9 17-16 20C17 39 8 32 8 22V9z"/><path class="icon-highlight" d="m16 22 6 6 11-13"/>
+    <% } else if (name === 'calendar') { %>
+      <rect class="icon-depth" x="7" y="11" width="34" height="33" rx="8"/><rect class="icon-face" x="7" y="8" width="34" height="33" rx="8"/><path class="icon-highlight" d="M16 5v7M32 5v7M8 18h32"/><path class="icon-detail" d="M16 25h3m10 0h3m-16 8h3m10 0h3"/>
+    <% } else if (name === 'people') { %>
+      <circle class="icon-depth" cx="34" cy="17" r="7"/><path class="icon-depth" d="M28 28c12-4 17 3 16 12H28z"/><circle class="icon-face" cx="20" cy="14" r="8"/><path class="icon-depth" d="M5 43v-5c0-8 6-13 15-13s15 5 15 13v5z"/><path class="icon-face" d="M5 40v-5c0-8 6-13 15-13s15 5 15 13v5z"/><path class="icon-highlight" d="M14 11c1-2 3-3 6-3M11 34c1-3 3-5 6-6"/>
+    <% } else if (name === 'logout') { %>
+      <path class="icon-face" d="M8 6h19v36H8z"/><path class="icon-highlight" d="M24 24h19m-7-7 7 7-7 7"/>
+    <% } else { %>
+      <rect class="icon-depth" x="5" y="8" width="16" height="16" rx="5"/><rect class="icon-depth" x="27" y="8" width="16" height="16" rx="5"/><rect class="icon-depth" x="5" y="30" width="16" height="16" rx="5"/><rect class="icon-depth" x="27" y="30" width="16" height="16" rx="5"/>
+      <rect class="icon-face" x="5" y="5" width="16" height="16" rx="5"/><rect class="icon-face" x="27" y="5" width="16" height="16" rx="5"/><rect class="icon-face" x="5" y="27" width="16" height="16" rx="5"/><rect class="icon-face" x="27" y="27" width="16" height="16" rx="5"/><path class="icon-highlight" d="M10 10h5M32 10h5M10 32h5M32 32h5"/>
+    <% } %>
+  </svg>
+</span>

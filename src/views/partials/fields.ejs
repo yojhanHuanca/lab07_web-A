@@ -1,0 +1,12 @@
+<div class="form-grid">
+  <div class="field"><label for="name">Nombre</label><input id="name" name="name" autocomplete="given-name" maxlength="80" required placeholder="Tu nombre"></div>
+  <div class="field"><label for="lastName">Apellidos</label><input id="lastName" name="lastName" autocomplete="family-name" maxlength="100" required placeholder="Tus apellidos"></div>
+  <div class="field"><label for="phoneNumber">Teléfono</label><input id="phoneNumber" name="phoneNumber" type="tel" autocomplete="tel" minlength="6" maxlength="25" required placeholder="+51 999 999 999"></div>
+  <div class="field"><label for="birthdate">Fecha de nacimiento</label><input id="birthdate" name="birthdate" type="date" autocomplete="bday" min="1900-01-01" required><span id="age-hint" class="helper-text"></span></div>
+  <div class="field full"><label for="email">Correo electrónico</label><input id="email" name="email" type="email" autocomplete="email" required placeholder="tu@correo.com"></div>
+  <% if (editing) { %>
+    <div class="field full"><label for="address">Dirección <span>opcional</span></label><input id="address" name="address" autocomplete="street-address" maxlength="250" placeholder="Tu dirección"></div>
+    <div class="field full"><label for="url_profile">URL de tu foto <span>opcional</span></label><input id="url_profile" name="url_profile" type="url" maxlength="2048" placeholder="https://ejemplo.com/mi-foto.jpg"></div>
+  <% } %>
+  <div class="field full"><label for="password"><%= editing ? 'Nueva contraseña' : 'Contraseña' %> <% if (editing) { %><span>opcional</span><% } %></label><div class="password-wrap"><input id="password" name="password" type="password" autocomplete="new-password" minlength="8" <%= editing ? '' : 'required' %> aria-describedby="password-help" placeholder="<%= editing ? 'Déjala vacía para conservar la actual' : 'Crea una contraseña segura' %>"><button class="reveal" type="button" aria-label="Mostrar contraseña" aria-pressed="false">Ver</button></div><span id="password-help" class="helper-text">Mínimo 8 caracteres, una mayúscula, un número y un símbolo # $ % &amp; * @.</span></div>
+</div>

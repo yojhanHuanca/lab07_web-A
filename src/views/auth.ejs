@@ -1,0 +1,29 @@
+<%- include('partials/head') %>
+<body data-page="<%= page %>" class="auth-body">
+<main class="auth-layout">
+  <aside class="auth-story">
+    <a class="brand" href="/signIn"><span class="brand-mark">n</span> nexo<span class="brand-dot">.</span></a>
+    <div class="story-copy"><span class="eyebrow light">TU ESPACIO, CONECTADO</span><h1>Todo empieza<br>con una buena<br><em>conexión.</em></h1><p>Un lugar para ti. Tu información, tu cuenta<br class="desktop-only"> y todo lo que necesitas, en orden.</p></div>
+    <div class="orbit-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div><div class="orbit-center">n<span>●</span></div><span class="orbit-point p1"></span><span class="orbit-point p2"></span><span class="orbit-badge"><%- include('partials/icon', { name: 'shield' }) %></span><span class="orbit-badge second"><%- include('partials/icon', { name: 'profile' }) %></span><span class="orbit-label">Hecho para conectar</span></div>
+    <div class="story-bottom"><span>Simple. Personal. Seguro.</span><span>01 — NEXO</span></div>
+  </aside>
+  <section class="auth-form-area">
+    <div class="auth-top"><span><%= page === 'signIn' ? '¿Aún no tienes cuenta?' : '¿Ya eres parte de Nexo?' %></span><a href="/<%= page === 'signIn' ? 'signUp' : 'signIn' %>"><%= page === 'signIn' ? 'Crear cuenta' : 'Iniciar sesión' %> ↗</a></div>
+    <div class="auth-content <%= page === 'signUp' ? 'signup-content' : '' %>">
+      <span class="eyebrow"> <%= page === 'signIn' ? 'QUÉ BUENO TENERTE AQUÍ' : 'EMPECEMOS' %></span>
+      <h2><%= page === 'signIn' ? 'Hola de nuevo.' : 'Tu nuevo espacio.' %></h2>
+      <p class="subtitle"><%= page === 'signIn' ? 'Entra a tu cuenta y continúa donde lo dejaste.' : 'Cuéntanos un poco de ti para crear tu cuenta.' %></p>
+      <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+      <form id="auth-form">
+        <% if (page === 'signUp') { %><%- include('partials/fields', { editing: false }) %><% } else { %>
+          <div class="field"><label for="email">Correo electrónico</label><input id="email" name="email" type="email" autocomplete="email" required placeholder="tu@correo.com"></div>
+          <div class="field"><label for="password">Contraseña</label><div class="password-wrap"><input id="password" name="password" type="password" autocomplete="current-password" required placeholder="Tu contraseña"><button class="reveal" type="button" aria-label="Mostrar contraseña" aria-pressed="false">Ver</button></div></div>
+        <% } %>
+        <button class="btn waves-effect waves-light primary-btn submit-btn" type="submit"><%= page === 'signIn' ? 'Entrar a mi cuenta' : 'Crear mi cuenta' %><span aria-hidden="true">→</span></button>
+      </form>
+      <p class="auth-note"><span class="tiny-lock" aria-hidden="true">◇</span> Tu información está en buenas manos.</p>
+    </div>
+    <footer class="auth-footer">Nexo · Un espacio para ti <span>© <%= new Date().getFullYear() %></span></footer>
+  </section>
+</main>
+</body></html>
